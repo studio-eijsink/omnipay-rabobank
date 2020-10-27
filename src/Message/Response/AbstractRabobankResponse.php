@@ -58,10 +58,9 @@ class AbstractRabobankResponse extends AbstractResponse
         if (!isset($this->data['signature'])) {
             return;
         }
-        
-        $signatureData = $this->data;
-        unset($signatureData['signature']);
-        unset($signatureData['timestamp']);
+
+        $allowedKeys = array_flip(['order_id', 'status']);
+        $signatureData = array_intersect_key($this->data, $allowedKeys);
 
         $signature = $this->request->gateway->generateSignature($this->flattenData($signatureData));
 
