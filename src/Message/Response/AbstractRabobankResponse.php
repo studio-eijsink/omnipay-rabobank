@@ -58,11 +58,8 @@ class AbstractRabobankResponse extends AbstractResponse
         if (!isset($this->data['signature'])) {
             return;
         }
-
+        
         $signatureData = $this->data;
-        unset($signatureData['get']);
-        unset($signatureData['baseUrl']);
-        unset($signatureData['order_id']);
         unset($signatureData['signature']);
         unset($signatureData['timestamp']);
 
