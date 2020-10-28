@@ -7,6 +7,7 @@ use Omnipay\Rabobank\Order;
 
 class StatusResponse extends AbstractRabobankResponse
 {
+    protected $signatureParameters = ['moreOrderResultsAvailable', 'orderResults'];
 
     /**
      * Indication if there are more order statuses available than in this response.

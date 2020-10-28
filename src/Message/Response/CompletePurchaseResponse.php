@@ -4,6 +4,8 @@ namespace Omnipay\Rabobank\Message\Response;
 
 class CompletePurchaseResponse extends AbstractRabobankResponse
 {
+    protected $signatureParameters = ['order_id', 'status'];
+
     public function isSuccessful()
     {
         return isset($this->data['status']) && $this->data['status'] === 'COMPLETED';

@@ -6,6 +6,8 @@ use Omnipay\Common\Message\RedirectResponseInterface;
 
 class PurchaseResponse extends AbstractRabobankResponse implements RedirectResponseInterface
 {
+    protected $signatureParameters = ['order_id', 'status'];
+
     /**
      * When you do a `purchase` the request is never successful because
      * you need to redirect off-site to complete the purchase.

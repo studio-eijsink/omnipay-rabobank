@@ -14,6 +14,8 @@ class AbstractRabobankResponse extends AbstractResponse
      */
     protected $request;
 
+    protected $signatureParameters = [];
+
     /**
      * @param AbstractRabobankRequest $request
      * @param array $data
@@ -59,8 +61,15 @@ class AbstractRabobankResponse extends AbstractResponse
             return;
         }
 
-        $allowedKeys = array_flip(['order_id', 'status']);
-        $signatureData = array_intersect_key($this->data, $allowedKeys);
+        $signatureData = $this->data;
+
+        if (!empty($this->signatureParameters) && !isset($signatureData['redirectUrl'])) {
+            $signatureKeys = array_flip($this->signatureParameters);
+            $signatureData = array_intersect_key($signatureData, $signatureKeys);
+        } else {
+            unset($signatureData['signature']);
+            unset($signatureData['timestamp']);
+        }
 
         $signature = $this->request->gateway->generateSignature($this->flattenData($signatureData));
 
