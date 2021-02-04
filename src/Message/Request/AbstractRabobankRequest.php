@@ -111,7 +111,7 @@ abstract class AbstractRabobankRequest extends AbstractRequest
      */
     public function getBaseUrl()
     {
-        if ($this->gateway->getTestMode()) {
+        if ($this->getTestMode()) {
             return $this->baseUrlTesting;
         }
 
