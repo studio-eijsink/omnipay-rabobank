@@ -25,4 +25,9 @@ class CompletePurchaseResponse extends AbstractRabobankResponse
     {
         return isset($this->data['order_id']) ? $this->data['order_id'] : null;
     }
+
+    public function isPaid()
+    {
+        return $this->isSuccessful();
+    }
 }
